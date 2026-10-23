@@ -5,7 +5,7 @@ import { ContratoModel } from "../models/contrato.model.js";
 
 export const crearIdol = async (req, res) => {
   try {
-    const datos = matchedData(req, { locations: [body] });
+    const datos = matchedData(req, { locations: ["body"] });
     const idol = await IdolModel.create(datos);
     // ok: true es una clave personalizada en la respuesta JSON
     res
