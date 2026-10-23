@@ -1,6 +1,6 @@
 import { matchedData } from "express-validator";
-import { IdolModel } from "../models/idol.model";
-import { PcModel } from "../models/pc.model";
+import { IdolModel } from "../models/idol.model.js";
+import { PcModel } from "../models/pc.model.js";
 import { ContratoModel } from "../models/contrato.model.js";
 
 export const crearIdol = async (req, res) => {

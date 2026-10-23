@@ -1,7 +1,7 @@
 import { body, param } from "express-validator";
-import { ContratoModel } from "../models/contrato.model.js";
-import { IdolModel } from "../models/idol.model.js";
-import { validarCampos } from "./validarCampos.js";
+import { ContratoModel } from "../../models/contrato.model.js";
+import { IdolModel } from "../../models/idol.model.js";
+import { validarCampos } from "../validarCampos.js";
 
 export const crearContratoValidator = [
   body("idol")

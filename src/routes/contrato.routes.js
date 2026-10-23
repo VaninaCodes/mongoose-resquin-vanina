@@ -12,9 +12,10 @@ import {
 } from "../middlewares/validations/contrato.validator.js";
 import { validarIdParam } from "../middlewares/validarId.js";
 
-export const router = Router();
+const router = Router();
 router.post("/", crearContratoValidator, crearContrato);
 router.get("/", obtenerContratos);
 router.get("/:id", validarIdParam, obtenerContratoPorId);
 router.put("/:id", actualizarContratoValidator, actualizarContrato);
 router.delete("/:id", validarIdParam, eliminarContrato);
+export default router;

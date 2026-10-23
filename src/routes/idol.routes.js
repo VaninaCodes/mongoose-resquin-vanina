@@ -12,9 +12,10 @@ import {
 } from "../middlewares/validations/idol.validator.js";
 import { validarIdParam } from "../middlewares/validarId.js";
 
-export const router = Router();
+ const router = Router();
 router.post("/", crearIdolValidator, crearIdol);
 router.get("/", obtenerIdols);
 router.get("/:id", validarIdParam, obtenerIdolPorId);
 router.put("/:id", actualizarIdolValidator, actualizarIdol);
 router.delete("/:id", validarIdParam, eliminarIdol);
+export default router;

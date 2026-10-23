@@ -44,7 +44,7 @@ export const crearIdolValidator = [
 export const actualizarIdolValidator = [
   param("id").isMongoId().withMessage("El ID no es válido"),
   body("nombreArtistico")
-    .optional.trim()
+    .optional().trim()
     .notEmpty()
     .isLength({ max: 50 })
     .custom(async (nombreArtistico, { req }) => {

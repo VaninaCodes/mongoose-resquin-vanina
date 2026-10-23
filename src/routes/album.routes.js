@@ -12,9 +12,10 @@ import {
 } from "../middlewares/validations/album.validator.js";
 import { validarIdParam } from "../middlewares/validarId.js";
 
-export const router = Router();
+const router = Router();
 router.post("/", crearAlbumValidator, crearAlbum);
 router.get("/", obtenerAlbumes);
 router.get("/:id", validarIdParam, obtenerAlbumPorId);
 router.put("/:id", actualizarAlbumValidator, actualizarAlbum);
 router.delete("/:id", validarIdParam, eliminarAlbum);
+export default router;
