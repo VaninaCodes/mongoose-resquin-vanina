@@ -44,7 +44,29 @@ export const crearPcValidator = [
   body("rareza").optional().isIn(RAREZAS),
   validarCampos,
 ];
-
+export const actualizarPcValidator = [
+  param("id").isMongoId().withMessage("El ID no es un ObjectId válido"),
+  body("nombre")
+    .optional()
+    .trim()
+    .notEmpty()
+    .isLength({ min: 2, max: 100 })
+    .custom(async (nombre, { req }) => {
+      const actual = await PcModel.findById(req.params.id);
+      if (!actual) return true; // el controlador responde 404
+      const duplicada = await PcModel.findOne({
+        nombre,
+        idol: actual.idol,
+        activo: true,
+        _id: { $ne: actual._id },
+      });
+      if (duplicada)
+        throw new Error("Ese idol ya tiene una photocard con ese nombre");
+    }),
+  body("imagenUrl").optional().isURL(),
+  body("rareza").optional().isIn(RAREZAS),
+  validarCampos,
+];
 // Endpoint N:M - ambos docs existen y el vinculo no esta duplicado
 
 export const agregarAlbumValidator = [

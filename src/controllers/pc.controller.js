@@ -22,7 +22,7 @@ export const crearPc = async (req, res) => {
   }
 };
 
-export const obtenerPces = async (req, res) => {
+export const obtenerPcs = async (req, res) => {
   try {
     const pcs = await PcModel.find({ activo: true })
       .populate(POPULATE);
