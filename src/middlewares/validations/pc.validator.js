@@ -19,7 +19,7 @@ export const crearPcValidator = [
     .withMessage("La imagen debe ser una URL válida"),
   body("rareza")
     .optional()
-    .isIdentityCard(RAREZAS)
+    .isIn(RAREZAS)
     .withMessage(`La rareza debe ser: ${RAREZAS.join(", ")}`),
   body("idol")
     .notEmpty()
@@ -28,7 +28,7 @@ export const crearPcValidator = [
     .withMessage("ID de idol inválido")
     // detiene la ejecución de validaciones
     .bail()
-    .custom(async (IdolModel, { req }) => {
+    .custom(async (idol, { req }) => {
       const existeIdol = await IdolModel.findOne({ _id: idol, activo: true });
       if (!existeIdol) throw new Error("El idol no existe");
       // evitar duplicados: mismo nombre
@@ -40,8 +40,8 @@ export const crearPcValidator = [
       if (duplicada)
         throw new Error("Ese idol ya tiene una photocard con ese nombre");
     }),
-  body("imagenUrl").optional().isURL(),
-  body("rareza").optional().isIn(RAREZAS),
+  // body("imagenUrl").optional().isURL(),
+  // body("rareza").optional().isIn(RAREZAS),
   validarCampos,
 ];
 export const actualizarPcValidator = [

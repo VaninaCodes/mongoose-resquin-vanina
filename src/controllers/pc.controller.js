@@ -8,11 +8,11 @@ const POPULATE = [
 
 export const crearPc = async (req, res) => {
   try {
-    const datos = matchedData(req, { locations: [body] });
+    const datos = matchedData(req, { locations: ["body"] });
     const pc = await PcModel.create(datos);
     res
       .status(201)
-      .json({ ok: true, mensaje: "Photocard creada correctamente", datos: pcCompleta  });
+      .json({ ok: true, mensaje: "Photocard creada correctamente", datos: pc  });
   } catch (error) {
     res.status(500).json({
       ok: false,

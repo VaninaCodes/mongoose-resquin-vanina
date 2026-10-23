@@ -4,7 +4,7 @@ import { PcModel } from "../models/pc.model.js";
 
 export const crearAlbum = async (req, res) => {
   try {
-    const datos = matchedData(req, { locations: [body] });
+    const datos = matchedData(req, { locations: ["body"] });
     const album = await AlbumModel.create(datos);
     res
       .status(201)
