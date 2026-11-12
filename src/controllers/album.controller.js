@@ -20,13 +20,12 @@ export const crearAlbum = async (req, res) => {
 
 export const obtenerAlbumes = async (req, res) => {
   try {
-    const albumes = await AlbumModel.find({ activo: true })
-      .populate({
-        path: "photocards",
-        match: { activo: true },
-        select: "nombre rareza",
-      })
-      .populate("contrato");
+    const albumes = await AlbumModel.find({ activo: true }).populate({
+      path: "photocard",
+      match: { activo: true },
+      select: "nombre rareza",
+    });
+
     res.status(200).json({ ok: true, data: albumes });
   } catch (error) {
     res
@@ -50,7 +49,7 @@ export const obtenerAlbumPorId = async (req, res) => {
     res.status(500).json({
       ok: false,
       mensaje: "Error al obtener el Album",
-      error: error.messange,
+      error: error.message,
     });
   }
 };
@@ -96,12 +95,10 @@ export const eliminarAlbum = async (req, res) => {
         .json({ ok: false, mensaje: "Album no encontrado" });
     await PcModel.updateMany({ albumes: id }, { $pull: { albumes: id } });
 
-    res
-      .status(200)
-      .json({
-        ok: true,
-        mensaje: "Álbum eliminado y desvinculado de sus photocards",
-      });
+    res.status(200).json({
+      ok: true,
+      mensaje: "Álbum eliminado y desvinculado de sus photocards",
+    });
   } catch (error) {
     res.status(500).json({
       ok: false,

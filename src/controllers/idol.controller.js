@@ -24,7 +24,7 @@ export const obtenerIdols = async (req, res) => {
   try {
     const idols = await IdolModel.find({ activo: true })
       .populate({
-        path: "photocards",
+        path: "photocard",
         match: { activo: true },
         select: "nombre rareza",
       })
@@ -52,7 +52,7 @@ export const obtenerIdolPorId = async (req, res) => {
     res.status(500).json({
       ok: false,
       mensaje: "Error al obtener el idol",
-      error: error.messange,
+      error: error.message,
     });
   }
 };
@@ -94,19 +94,15 @@ export const eliminarIdol = async (req, res) => {
       return res.status(404).json({ ok: false, mensaje: "Idol no encontrado" });
     const pcs = await PcModel.updateMany({ idol: id }, { activo: false });
     await ContratoModel.updateMany({ idol: id }, { activo: false });
-    res
-      .status(200)
-      .json({
-        ok: true,
-        mensaje: `Idol eliminado. Photocards desactivadas: ${pcs.modifiedCount}`,
-      });
+    res.status(200).json({
+      ok: true,
+      mensaje: `Idol eliminado. Photocards desactivadas: ${pcs.modifiedCount}`,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        ok: false,
-        mensaje: "Error al eliminar el idol",
-        error: error.message,
-      });
+    res.status(500).json({
+      ok: false,
+      mensaje: "Error al eliminar el idol",
+      error: error.message,
+    });
   }
 };

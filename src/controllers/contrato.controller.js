@@ -22,18 +22,18 @@ export const crearContrato = async (req, res) => {
 
 export const obtenerContratos = async (req, res) => {
   try {
-    const contratos = await ContratoModel.find({ activo: true })
-      .populate("idol", "nombreArtistico grupo")
-      .populate("contrato");
+    const contratos = await ContratoModel.find({ activo: true }).populate(
+      "idol",
+      "nombreArtistico grupo",
+    );
+
     res.status(200).json({ ok: true, data: contratos });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        ok: false,
-        mensaje: "Error al obtener los Contratos",
-        error: error.message,
-      });
+    res.status(500).json({
+      ok: false,
+      mensaje: "Error al obtener los Contratos",
+      error: error.message,
+    });
   }
 };
 
@@ -99,12 +99,10 @@ export const eliminarContrato = async (req, res) => {
       .status(200)
       .json({ ok: true, mensaje: "Contrato eliminado correctamente" });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        ok: false,
-        mensaje: "Error al eliminar el Contrato",
-        error: error.message,
-      });
+    res.status(500).json({
+      ok: false,
+      mensaje: "Error al eliminar el Contrato",
+      error: error.message,
+    });
   }
 };
